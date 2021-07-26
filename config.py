@@ -1,12 +1,12 @@
 summary_dir = 'summary'
-num_episodes = 10000
+num_episodes = 500000
 display = True
 
 # exploration-exploitation trade-off factor
-epsilon = 0.3  # must be a real number between (0,1)
+epsilon = 0.25  # must be a real number between (0,1)
 
 # learning-rate
-learning_rate = 0.2  # must be a real number between (0,1)
+learning_rate = 0.3  # must be a real number between (0,1)
 
 # discount-factor
 discount_factor = 0.9  # must be a real number between (0,1)
@@ -27,6 +27,7 @@ def display_board(board, action, workerID, worker1, worker2, reward, done, possi
     if reward == -1:
         print("New action called")
     elif reward == 1:
+
         print("Process complete!")
     elif reward == -10:
         print("Product didn't assemble successfully.")

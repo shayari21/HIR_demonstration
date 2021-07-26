@@ -7,6 +7,7 @@ from agents import QLearningAgent
 from environment import Workspace
 from config import display_board
 
+cfg.display = False
 env = Workspace()
 worker1 = QLearningAgent(name=cfg.WorkerRobot_QLearningAgent_name)
 
@@ -32,11 +33,12 @@ for i in tqdm(range(episodes)):
         reward, done = env.step(workerID, action)
         episode_reward_worker1 += reward
         worker1.updateQ(reward, env.board, env.possible_actions())
-        display_board(env.board, action, workerID, worker1,worker2, reward, done, env.possible_actions(), training=True)
+        if cfg.display:
+            display_board(env.board, action, workerID, worker1,worker2, reward, done, env.possible_actions(), training=True)
 
     if episodes % 100 == 0:
         tot_rewards.append(episode_reward_worker1)
-
+print(env.counter)
 plt.plot(tot_rewards)
 plt.show()
 worker1.saveQtable()
