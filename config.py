@@ -1,3 +1,5 @@
+from environment import RobotState
+
 summary_dir = 'summary'
 num_episodes = 500000
 display = True
@@ -13,11 +15,20 @@ discount_factor = 0.9  # must be a real number between (0,1)
 
 WorkerRobot_QLearningAgent_name = 'QLearning_Robot'
 
+def board_to_state(board):
+    str_board = []
+    for each in board:
+        if each == "_":
+            str_board.append(each)
+        else:
+            str_board.append(RobotState(each).name)
+    return str_board
+
 def display_board(board, action, workerID, worker1, worker2, reward, done, possible_actions, training=True,
                   episode_reward_worker1=None, episode_reward_worker2=None):
 
     print('\n')
-    print(board)
+    print(board_to_state(board))
 
     worker = worker1.name if workerID else worker2.name
     print(f'{worker} takes action {action}, gets reward {reward}. Done -> {done}')
